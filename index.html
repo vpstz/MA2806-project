@@ -31,11 +31,14 @@
             <pre>
 
             </pre>
-            <div class="chart" id="adults">
-                <svg>
+            <canvas class="chart" id="adults">
 
-                </svg>
-            </div>
+            </canvas>
+<!--            <div class="chart" id="adults">-->
+<!--                <svg>-->
+
+<!--                </svg>-->
+<!--            </div>-->
         </div>
 
         <div id="second">
@@ -47,6 +50,10 @@
     </div>
 
 <!--    Calls script for dynamic loading of charts-->
-    <script src="script.js"></script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>-->
+    <script async type="application/javascript" src="scripts.js"></script>
 </body>
 </html>

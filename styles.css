@@ -30,12 +30,17 @@ nav {
     justify-content: center;
     color: white;
     position: fixed;
+    font-size: 20px
 }
 nav a:link {
     text-decoration: underline;
+    fint-size: 30px;
     color: white;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px;
+}
+nav a:visited {
+    color: white;
 }
 
 header {
@@ -48,3 +53,4 @@ img {
 figcaption {
     text-align: right;
 }
+
