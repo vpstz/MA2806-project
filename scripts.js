@@ -1,5 +1,9 @@
-function drawChart(element) {
+function drawChart(element, data) {
     // TODO: finish draw chart function
+    new Chart(element, {
+        type: 'line',
+        data: data
+    });
 
 }
 
@@ -24,17 +28,34 @@ function csvToJson(csvText) {
     return result;
 }
 
+function toChartReadable(json) {
+    output = {datasets: [], labels: json['All'].year}
+    for (let key in json) {
+
+        output.datasets.push({
+            label: key,
+            data: json[key].percentage,
+            fill: false,
+            tension: 0.01,
+        })
+    }
+    return output;
+}
+
 async function readData(uri) {
     let result = await fetch(uri)
     let csv = await result.text();
-    return csvtoJson(csv);
+    return csvToJson(csv);
 }
 
 
-function main() {
+async function main() {
     let elements = document.getElementsByClassName('chart');
-    const json = readData("datasets/cigarette-smoking-among-adults-2011-to-2022.csv");
-
+    const json = await readData("datasets/cigarette-smoking-among-adults-2011-to-2022.csv");
+    console.log(json);
+    const data = toChartReadable(json);
+    console.log(data)
+    drawChart(elements[0], data);
 
 }
 
