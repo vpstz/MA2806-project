@@ -6,53 +6,55 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<!--    Calls script for dynamic loading of charts-->
+    <script async src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+    <script async src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script async type="application/javascript" src="scripts.js"></script>
+
+<!--    Navigation bar-->
     <nav class="navigation">
         <a href="#home" >Home</a>
-        <a href="#smoking-adults" >Smoking in adults</a>
+        <a href="#cigarette-use" >Cigarette use in the UK</a>
         <a href="#second" >todo</a>
     </nav>
     <div class="strip">
-        <header id="home"><img src="assets/smoking-man-1493549734JPq.jpg" height="1280" width="1920" alt="Man smoking on bench"/>
-            <figcaption>
-                <i class="photo-credit">
-                    <a href="https://www.publicdomainpictures.net/en/view-image.php?image=211936&picture=smoking-man">publicdomainimages.net</a>
-                </i>
-            </figcaption>
+        <header id="home">
+            <figure>
+                <img src="assets/smoking-man-1493549734JPq.jpg" height="1280" width="1920" alt="Man smoking on bench"/>
+                <figcaption>
+                    <i class="photo-credit">
+                        <a href="https://www.publicdomainpictures.net/en/view-image.php?image=211936&picture=smoking-man">publicdomainimages.net</a>
+                    </i>
+                </figcaption>
+            </figure>
 
             <h1>Tobacco use in the UK</h1>
-            <p> Or hereI</p>
         </header>
-        <pre>
+        <p>
             TODOI
-        </pre>
+        </p>
 
-        <div id="smoking-adults">
-            <h2>smoking amongst adults</h2>
-            <pre>
-
-            </pre>
-            <canvas class="chart" id="adults">
-
-            </canvas>
-<!--            <div class="chart" id="adults">-->
-<!--                <svg>-->
-
-<!--                </svg>-->
-<!--            </div>-->
+        <div id="cigarette-use">
+            <h2>Smoking amongst by ethnicity</h2>
+            <p>
+                As shown by the data below cigarette use has been slowly going down in the UK over the last few years.
+                This could be due to
+            </p>
+            <div>
+                <div class="button-group">
+                    <button type="button" disabled>By ethnicity</button>
+                    <button type="">By region</button>
+                </div>
+                <canvas class="chart" id="by-ethnicity"></canvas>
+            </div>
         </div>
 
         <div id="second">
             <h2>To DO</h2>
-            <pre>
+            <p>
 
-            </pre>
+            </p>
         </div>
     </div>
-
-<!--    Calls script for dynamic loading of charts-->
-
-    <script async src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
-    <script async src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-    <script async type="application/javascript" src="scripts.js"></script>
 </body>
 </html>

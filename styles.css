@@ -21,6 +21,35 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
+.button-group button {
+    background-color: #f1a238; /* Green background */
+    border: 1px solid #e09123; /* Green border */
+    color: white; /* White text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+.button-group button:disabled {
+    background-color: #d59034;
+}
+
+/* Clear floats (clearfix hack) */
+.button-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.button-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.button-group button:hover {
+    background-color: #d59034;
+}
+
 nav {
     display:flex;
     background: black;
