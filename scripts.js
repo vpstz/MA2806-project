@@ -3,10 +3,6 @@ function drawChart(element) {
 
 }
 
-function readData(data) {
-
-}
-
 function csvToJson(csvText) {
     const parsed = Papa.parse(csvText, {header: true});
 
@@ -28,14 +24,17 @@ function csvToJson(csvText) {
     return result;
 }
 
+async function readData(uri) {
+    let result = await fetch(uri)
+    let csv = await result.text();
+    return csvtoJson(csv);
+}
+
+
 function main() {
     let elements = document.getElementsByClassName('chart');
-    fetch("datasets/cigarette-smoking-among-adults-2011-to-2022.csv")
-        .then(res => res.text())
-        .then(csv => {
-            const data = csvToJson(csv);
-            console.log(data);
-        });
+    const json = readData("datasets/cigarette-smoking-among-adults-2011-to-2022.csv");
+
 
 }
 
