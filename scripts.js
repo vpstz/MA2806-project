@@ -1,10 +1,16 @@
+
+
 function drawChart(element, data) {
     // TODO: finish draw chart function
-    new Chart(element, {
+    return new Chart(element, {
         type: 'line',
         data: data
     });
+}
 
+function updateChart(chart, data) {
+    chart.data = data;
+    chart.update();
 }
 
 function csvToJson(csvText) {
@@ -48,14 +54,34 @@ async function readData(uri) {
     return csvToJson(csv);
 }
 
+function changeUsageGraph(button, chart, data) {
+    const buttons = document.getElementsByClassName('region-button');
+    for (const button of buttons) {
+        if (button.disabled) {
+            button.disabled = false;
+        }
+    }
+    updateChart(chart, data);
+    button.disabled = true;
+}
 
 async function main() {
-    let elements = document.getElementsByClassName('chart');
+    let chart_elements = document.getElementsByClassName('chart');
     const json = await readData("datasets/cigarette-smoking-among-adults-2011-to-2022.csv");
-    console.log(json);
+    // console.log(json);
     const data = toChartReadable(json);
-    console.log(data)
-    drawChart(elements[0], data);
+
+    const usage_chart = drawChart(chart_elements[0], data)
+    // console.log(data)
+    // drawChart(chart_elements[0], data);
+
+    const ethnicity_btn = document.getElementById('ethnicity-button');
+    const region_btn = document.getElementById('region-button');
+
+    ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, chart, data);};
+    region_btn.onclick = () => {changeUsageGraph(ethnicity_btn, chart, data);};
+
+    ethnicity_btn.click();
 
 }
 
