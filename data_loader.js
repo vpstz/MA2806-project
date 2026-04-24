@@ -68,23 +68,13 @@ async function readData(uri) {
     return load_csv(result);
 }
 
-async function load_ethnicity() {
-    const json = await readData("datasets/ethnicity-usage.csv");
-    // console.log(json);
-    return json;
-}
-
-async function load_regional() {
-    const data = await readData("datasets/regional-usage.csv");
-    // data = jsonToChart(data);
-    return data;
-}
-
 async function load_datasets() {
     const datasets = {
         usage: {
-            ethnicity: await load_ethnicity(),
-            regional: await load_regional()
+            ethnicity: await readData("datasets/regional-usage.csv"),
+            regional: await readData("datasets/ethnicity-usage.csv"),
+            sex: await readData("datasets/usage-by-sex.csv"),
+
         }
     };
     return datasets;

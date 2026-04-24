@@ -41,7 +41,7 @@ function updateChart(chart, data) {
 }
 
 function changeUsageGraph(button, chart, data) {
-    const buttons = document.getElementsByClassName('region-button');
+    const buttons = document.getElementsByClassName('usage-btn');
     for (const button of buttons) {
         if (button.disabled) {
             button.disabled = false;
@@ -62,9 +62,11 @@ async function main() {
 
     const ethnicity_btn = document.getElementById('ethnicity-button');
     const region_btn = document.getElementById('region-button');
+    const sex_btn = document.getElementById('sex-button')
 
     ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, usage_chart, datasets.usage.ethnicity);};
     region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.usage.regional);};
+    sex_btn.onclick = () => {changeUsageGraph(sex_btn, usage_chart, datasets.usage.sex)}
     ethnicity_btn.click();
     // ethnicity_btn.click();
 
