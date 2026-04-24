@@ -5,17 +5,42 @@ function drawChart(element, data) {
     return new Chart(element, {
         type: 'line',
         data: data,
+        options: {
+            parsing: false,
+
+            scales: {
+                x: {
+                    type: "time",
+                    time: {
+                        unit: "year"
+                    },
+                    min: new Date('2007-01-01'),
+                    max: new Date('2024-12-31'),
+                    title: {
+                        display: true,
+                        text: "Year"
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: "Percentage"
+                    }
+                }
+            }
+        }
         });
 }
 
 
-function updateChart(chart, data, options) {
-    chart.data = {datasets: data};
-    chart.options = options
+function updateChart(chart, data) {
+    chart.data = {datasets: data.dataset};
+    chart.options.scales.x.min = data.min
+    chart.options.scales.x.max = data.max
     chart.update();
 }
 
-function changeUsageGraph(button, chart, data, options) {
+function changeUsageGraph(button, chart, data) {
     const buttons = document.getElementsByClassName('region-button');
     for (const button of buttons) {
         if (button.disabled) {
@@ -23,7 +48,7 @@ function changeUsageGraph(button, chart, data, options) {
         }
     }
     console.log(data);
-    updateChart(chart, data, options);
+    updateChart(chart, data);
     button.disabled = true;
 }
 
@@ -39,30 +64,7 @@ async function main() {
     const region_btn = document.getElementById('region-button');
 
     ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, usage_chart, datasets.usage.ethnicity);};
-    region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.usage.regional, {
-        parsing: false,
-
-        scales: {
-            x: {
-                type: "time",
-                time: {
-                    unit: "year"
-                },
-                min: new Date('2007-01-01'),
-                max: new Date('2024-12-31'),
-                title: {
-                    display: true,
-                    text: "Year"
-                }
-            },
-            y: {
-                title: {
-                    display: true,
-                    text: "Percentage"
-                }
-            }
-        }
-    });};
+    region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.usage.regional);};
     region_btn.click();
     // ethnicity_btn.click();
 

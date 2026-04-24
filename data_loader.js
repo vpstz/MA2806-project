@@ -69,7 +69,7 @@ function load_csv(text) {
     // return results;
     let results = Papa.parse(text, {
         header: true,
-        dynamicTyping: true,
+        // dynamicTyping: true,
     });
     const data = results.data;
 
@@ -77,24 +77,35 @@ function load_csv(text) {
     const columns = Object.keys(data[0]);
     const dateKey = columns[0]; // assume first column is date
     const seriesKeys = columns.slice(1);
+    let min = new Date("2030");
+    let max = new Date("2000");
 
     // Build datasets for Chart.js
     const datasets = seriesKeys.map(key => {
-        return {
+        // const date = new Date(row[dateKey])
+        // if (date > max) max = date;
+        // if (date < min) min = date;
+        const out = {
             label: key,
             data: data
-                .filter(row => row[dateKey] && row[key] != null)
-                .map(row => ({
-                    x: new Date(row[dateKey]),
-                    y: row[key]
-                })),
+                // .filter(row => row[dateKey] && row[key] != null)
+                .map(row => {
+                    const date = new Date(row[dateKey]);
+                    if (date > max) max = date;
+                    if (date < min) min = date;
+                    return {
+                        x: date,
+                        y: Number(row[key])
+                    }
+                }),
             // borderWidth: 2,
             fill: false,
             tension: 0.25
         };
+
+        return out;
     });
-    console.log(datasets);
-    return datasets;
+    return {dataset: datasets, min: min, max: max};
 }
 
 
@@ -111,9 +122,9 @@ async function readData(uri) {
 }
 
 async function load_ethnicity() {
-    const json = await readEthnicData("datasets/cigarette-smoking-among-adults-2011-to-2022.csv");
+    const json = await readData("datasets/ethnicity-usage.csv");
     // console.log(json);
-    return toChartReadable(json);
+    return json;
 }
 
 async function load_regional() {
