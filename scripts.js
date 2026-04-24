@@ -63,10 +63,12 @@ async function main() {
     const ethnicity_btn = document.getElementById('ethnicity-button');
     const region_btn = document.getElementById('region-button');
     const sex_btn = document.getElementById('sex-button')
+    const age_btn = document.getElementById('age-button');
 
     ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, usage_chart, datasets.usage.ethnicity);};
     region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.usage.regional);};
     sex_btn.onclick = () => {changeUsageGraph(sex_btn, usage_chart, datasets.usage.sex)}
+    age_btn.onclick = () => {changeUsageGraph(age_btn, usage_chart, datasets.usage.age);};
     ethnicity_btn.click();
     // ethnicity_btn.click();
 

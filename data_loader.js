@@ -74,6 +74,7 @@ async function load_datasets() {
             ethnicity: await readData("datasets/regional-usage.csv"),
             regional: await readData("datasets/ethnicity-usage.csv"),
             sex: await readData("datasets/usage-by-sex.csv"),
+            age: await readData("datasets/by-age.csv"),
 
         }
     };
