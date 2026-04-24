@@ -65,7 +65,7 @@ async function main() {
 
     ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, usage_chart, datasets.usage.ethnicity);};
     region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.usage.regional);};
-    region_btn.click();
+    ethnicity_btn.click();
     // ethnicity_btn.click();
 
 }
