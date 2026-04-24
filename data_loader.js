@@ -1,52 +1,3 @@
-function csvToJson(csvText) {
-    const parsed = Papa.parse(csvText, {header: true});
-
-    const result = {};
-
-    parsed.data.forEach(row => {
-        const ethnicity = row.ethnicity;
-        const year = Number(row.time);
-        const percentage = Number(row.value);
-
-        if (!result[ethnicity]) {
-            result[ethnicity] = {year: [], percentage: []};
-        }
-
-        result[ethnicity].year.push(year);
-        result[ethnicity].percentage.push(percentage);
-    });
-
-    return result;
-}
-
-function toChartReadable(json) {
-    output = {datasets: [], labels: json['All'].year}
-    for (let key in json) {
-
-        output.datasets.push({
-            label: key,
-            data: json[key].percentage,
-            fill: false,
-            tension: 0.01,
-        })
-    }
-    return output;
-}
-
-function jsonToChart(json) {
-    output = {datasets: [], labels: json['date']}
-
-    for (let key in json) {
-        output.datasets.push({
-            label: key,
-            data: json[key],
-            fill: false,
-            tension: 0.01,
-        })
-    }
-    console.log(output);
-    return output;
-}
 
 function load_csv(text) {
     // const parsed = Papa.parse(text, {header: true});
@@ -109,11 +60,7 @@ function load_csv(text) {
 }
 
 
-async function readEthnicData(uri) {
-    let result = await fetch(uri)
-    let csv = await result.text();
-    return csvToJson(csv);
-}
+
 
 async function readData(uri) {
     let result = await fetch(uri);
