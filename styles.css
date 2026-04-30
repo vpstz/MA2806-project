@@ -21,9 +21,12 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
+/* TODO: improve button appearance, not sure of cigarette appearance */
 .button-group button {
-    background-color: #f1a238; /* Green background */
-    border: 1px solid #e09123; /* Green border */
+    /*background-color: #f1a238; !* Green background *!*/
+    background-image: url("assets/filter-2.png");
+    background-size: cover;
+    border: 2px groove #e09123; /* Green border */
     color: white; /* White text */
     padding: 10px 24px; /* Some padding */
     cursor: pointer; /* Pointer/hand icon */
@@ -31,7 +34,9 @@ body {
 }
 
 .button-group button:disabled {
-    background-color: #d59034;
+    /*background-color: #d59034;*/
+    background-image: url("assets/cig-white.png");
+    color: black;
 }
 
 /* Clear floats (clearfix hack) */
@@ -48,11 +53,12 @@ body {
 /* Add a background color on hover */
 .button-group button:hover {
     background-color: #d59034;
+    border: 2px outset darkgoldenrod;
 }
 
 nav {
     display:flex;
-    background: black;
+    background: #ca7a0e;
     width:100%;
     height:50px;
     align-items: center;
@@ -63,7 +69,7 @@ nav {
 }
 nav a:link {
     text-decoration: underline;
-    fint-size: 30px;
+    font-size: 20px;
     color: white;
     font-weight: bold;
     padding: 15px;
