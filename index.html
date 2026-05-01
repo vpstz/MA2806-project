@@ -51,9 +51,8 @@
                    Despite decades of health warnings, smoking remains a significant public health issue in the UK,
                     even though it is much less common than it used to be.
                 </p>
-                <p>
-                    The overall trend shows that adults smoking across each year is decreasing,
-                </p>
+                <p>The overall trend shows that adults smoking across each year is decreasing</p>
+                <p>Please click on the buttons bellow to see the usage by demographics with their respective descriptions </p>
                 <div class="multi-graph">
                     <div class="button-group" id="usage-buttons">
                         <button type="button" id="sex-button" class="usage-btn sex" >By sex</button>
@@ -74,7 +73,7 @@
                             <p>
                                 Age tells the strongest story in this dataset.  At the start of the chart, younger
                                 adults, especially those aged 16-24 and 25-34 had some of the highest smoking rates.
-                                Over time, these younger groups have fallen below most of the older group. With the the 16-24
+                                Over time, these younger groups have fallen below most of the older group. With the 16-24
                                 group falling from consistently being the top second smokers, to now being second to least
                                 likely to smoke.
                             </p>
@@ -118,37 +117,32 @@
                 </p>
             </div>
 
+<!--            TODO: Fill quitting chart-->
             <div id="quitting">
                 <h2>Quitting</h2>
-
+                <p>Placeholder.  Needs feeling</p>
+                <p>chart should go here</p>
+                <p>followup text</p>
 
             </div>
-
-
         </section>
 
         <div id="health-risks">
             <h2>The effects of smoking</h2>
             <p>
-                Awareness around the danger of smoking is increasing, and although most people are aware that it is
-                harmful to you - you probably don't know all the ways it can affect you
+                Smoking is often discussed as a physical health issue, but its effects spread further than just the body.
+                It can affect many other things like appearance, finances, relationships, mental health and overall
+                quality of life.
             </p>
-            <p>It's not just harmful to your body, bit it also impacts your mind/mental health, appearance, finances and relationships. test</p>
-
-            <div class="smart-graph">
-                <div class="button-group" id="death-buttons">
-                    <button type="button" id="total-death-btn" class="death-btn">Overall</button>
-                    <button type="button" id="men-death-btn" class="death-btn">Men</button>
-                    <button type="button" id="women-death-btn" class="death-btn">Women</button>
-                </div>
-                <canvas class="pie-chart" id="smart-death-chart"></canvas>
-            </div>
+            <p>
+                The damage is not always immediate, which can make the risks seem distant and not as worrying as they
+                should be, especially to young people.
+            </p>
 
             <section>
                 <h3>Physical affects</h3>
                 <p>
-                    Smoking has a plethora of harmful affects on your health, ranging from things that you can notice
-                    after smoking for not too long, to life threatening conditions as you age.
+                    Smoking has a range of negative effects on your body, ranging
                 </p>
             </section>
 
@@ -166,8 +160,34 @@
                 <h3>Appearance</h3>
             </section>
 
-            <section>
+            <section id="deaths">
                 <h3>Deaths</h3>
+                <p>
+                    The smoking usage data shows a decline, but the deaths linked to smoking show why tobacco is still
+                    a major public health issue.  The chart shows that smoking-related deaths are not caused by one
+                    single illness, but a large range of illnesses.
+                </p>
+                <div class="smart-graph">
+                    <div class="button-group" id="death-buttons">
+                        <button type="button" id="total-death-btn" class="death-btn">Overall</button>
+                        <button type="button" id="men-death-btn" class="death-btn">Men</button>
+                        <button type="button" id="women-death-btn" class="death-btn">Women</button>
+                    </div>
+                    <canvas class="pie-chart" id="smart-death-chart"></canvas>
+                </div>
+                <div>
+                    <p>
+                        The largest categories suggest that the most series effects of smoking are often long term
+                        diseases.   This is important because smoking can look like an individual habit in the present,
+                        while the consequences come to catch you later on in life.
+                    </p>
+                    <p>
+                        The difference between the number of total smoking related deaths of men and women is that there
+                        appears to be more men who are killed by smoking than women.  However, this is inline with the
+                        different numbers of how much either sex smokes.  As our chart earlier showed that men were more
+                        likely to smoke than women. which explains this difference.
+                    </p>
+                </div>
             </section>
         </div>
     </div>
