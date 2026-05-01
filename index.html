@@ -35,27 +35,64 @@
             <h1>Tobacco use in the UK</h1>
         </header>
         <p>
-            When the UK announced a new smoking ban for anyone born after 2008, it made me wonder how much tobacco use
-            has really changed over the years. How much has smoking actually declined over the years?
+            In the UK, smoking is no longer as prevalent as it once was.  It has been banned from taking place in pubs,
+            restaurants, offices, and public buildings, and now the government is banning the sale of cigarettes to
+            anyone born after 2008.  That made me wonder: is smoking already disappearing, or is it simply changing who
+            it affects?
         </p>
-        <p>This website will be going over how usage has changed over the years, the health effects and the percentage of people trying to quit</p>
+        <p>
+            To explore this, I used UK smoking prevalence data by demographic groups, alongside health and mortality
+            data linked to smoking.  Together, these datasets will show a story of decline
+        </p>
         <section>
             <div id="cigarette-use">
-                <h2>Cigarette usage in the UK</h2>
+                <h2>A Habit in decline</h2>
                 <p>
                    Despite decades of health warnings, smoking remains a significant public health issue in the UK,
                     even though it is much less common than it used to be.
                 </p>
-
+                <p>
+                    The overall trend shows that adults smoking across each year is decreasing,
+                </p>
                 <div class="multi-graph">
                     <div class="button-group" id="usage-buttons">
-                        <button type="button" id="ethnicity-button" class="usage-btn">By ethnicity</button>
-                        <button type="button" id="region-button" class="usage-btn">By region</button>
-                        <button type="button" id="sex-button" class="usage-btn">By sex</button>
-                        <button type="button" id="age-button" class="usage-btn">By age</button>
+                        <button type="button" id="sex-button" class="usage-btn sex" >By sex</button>
+                        <button type="button" id="age-button" class="usage-btn age">By age</button>
+                        <button type="button" id="ethnicity-button" class="usage-btn ethnicity">By ethnicity</button>
+                        <button type="button" id="region-button" class="usage-btn region" name="region">By region</button>
                     </div>
                     <canvas class="chart" id="cigarette-usage-chart"></canvas>
+                    <div class="dynamic-descriptions-container" id="usage-descriptions">
+                        <div class="dynamic-description sex" id="sex-description">
+                            <p>
+                                Smoking has declined for both men and women since 2000, but men consistently been likely to
+                                smoke than women.
+                            </p>
+                        </div>
+
+                        <div class="dynamic-description age" id="age-description">
+                            Age tells the strongest story in this dataset.  At the start of the chart, younger
+                            adults, especially those aged 16-24 and 25-34 had some of the highest smoking rates.
+                            Over time, these younger groups have fallen below most of the older group.
+                        </div>
+
+                        <div class="dynamic-description ethnicity" id="ethnicity-description" >
+                            <p>Placeholder 1</p>
+                        </div>
+
+                        <div class="dynamic-description region" id="region-description" >
+                            <p>Placeholder 2</p>
+                            <p>wow</p>
+                            <p>test</p>
+                            <p>wowo</p>
+                        </div>
+                    </div>
                 </div>
+
+                <p>
+                    The strongest pattern displayed in
+                </p>
+
                 <p>
                     These charts have shown that smoking has gone down dramatically over the last couple of decades: from
                     30% in 2000 to under 10% since 2024.

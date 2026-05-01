@@ -108,6 +108,20 @@ img {
 .chart {
     max-height: 90%;
 }
+
+.dynamic-descriptions-container {
+    display: grid;
+}
+
+.dynamic-description-container div {
+    grid-column: 1;
+    grid-row: 1;
+    /*visibility: collapse;*/
+    display: none;
+}
+.multi-graph {
+    border: 2px solid orange;
+}
 figcaption {
     text-align: right;
 }

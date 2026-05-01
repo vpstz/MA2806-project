@@ -65,46 +65,45 @@ function updateChart(chart, data) {
     chart.update();
 }
 
-function changeUsageGraph(button, chart, data) {
-    const buttons = document.getElementsByClassName('usage-btn');
-    for (const button of buttons) {
-        if (button.disabled) {
+function changeUsageGraph(chart, buttons, descriptions, key , data) {
+    for (const button of buttons.children) {
+        const i = button.classList[1];
+        const description =  descriptions.getElementsByClassName(i)[0];
+        if (i === key) {
+            button.disabled = true;
+            description.style.display = 'block';
+        } else {
             button.disabled = false;
+            description.style.display = 'none';
         }
     }
-    console.log(data);
-    updateChart(chart, data);
-    button.disabled = true;
+
+    updateChart(chart, data[key]);
+
 }
 
 function load_usage(datasets) {
-    const usage_chart = drawChart(document.getElementById("cigarette-usage-chart"), datasets.ethnicity)
+    const usage_chart = drawChart(document.getElementById("cigarette-usage-chart"), {})
     // console.log(data)
     // drawChart(chart_elements[0], data);
 
-    const ethnicity_btn = document.getElementById('ethnicity-button');
-    const region_btn = document.getElementById('region-button');
-    const sex_btn = document.getElementById('sex-button')
-    const age_btn = document.getElementById('age-button');
+    const descriptions = document.getElementById('usage-descriptions');// get_elements_of(keys, '-description');
+    const buttons = document.getElementById('usage-buttons');// get_elements_of(keys, '-button');
+    // for (const key of keys) {
+    //     buttons[key].onclick = () => {changeUsageGraph(usage_chart, buttons, descriptions, key, datasets)}
+    // }
+    for (const button of buttons.children) {
+        const key = button.classList[1];
+        button.onclick = () => {changeUsageGraph(usage_chart, buttons, descriptions, key, datasets);};
+    }
+    buttons.children[0].click();
 
     console.log(datasets.sex);
 
-    ethnicity_btn.onclick = () => {changeUsageGraph(ethnicity_btn, usage_chart, datasets.ethnicity);};
-    region_btn.onclick = () => {changeUsageGraph(region_btn, usage_chart, datasets.regional);};
-    sex_btn.onclick = () => {changeUsageGraph(sex_btn, usage_chart, datasets.sex)}
-    age_btn.onclick = () => {changeUsageGraph(age_btn, usage_chart, datasets.age);};
-    ethnicity_btn.click();
 }
 
 
 function load_death_chart(datasets) {
-    const chart_group = document.getElementById('death-charts');
-    const chart_elements = {
-        total: document.getElementById('total-death'),
-        women: document.getElementById('women-death'),
-        men: document.getElementById('men-death'),
-    }
-
     const death_buttons = {
         total: document.getElementById('total-death-btn'),
         women: document.getElementById('women-death-btn'),
