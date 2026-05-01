@@ -129,7 +129,7 @@ function read_death(csv) {
     let format = new Intl.NumberFormat('en-GB')
     for (let item in datasets) {
         configs[item] = gen_config('pie', {labels: labels, datasets:datasets[item]},
-            gen_options(undefined, "Total deaths: " + format.format(totals[item]))
+            gen_options(undefined, "Total smoking related deaths: " + format.format(totals[item]))
         );
     }
 
