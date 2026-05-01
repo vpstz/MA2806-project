@@ -104,6 +104,10 @@ img {
     width: 99%;
     height: auto;
 }
+
+.chart {
+    max-height: 90%;
+}
 figcaption {
     text-align: right;
 }
