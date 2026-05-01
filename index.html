@@ -39,46 +39,55 @@
             has really changed over the years. How much has smoking actually declined over the years?
         </p>
         <p>This website will be going over how usage has changed over the years, the health effects and the percentage of people trying to quit</p>
+        <section>
+            <div id="cigarette-use">
+                <h2>Cigarette usage in the UK</h2>
+                <p>
+                    Despite health risks, smoking in the UK is very popular, but not as popular as it once was.
+                    As shown by the graphs below: back in 2011 around 20% of adults smoked, but this has dropped to
+                    around 10% since 2024.
+                </p>
 
-        <div id="cigarette-use">
-            <h2>Cigarette usage in the UK</h2>
-            <p>
-                Despite health risks, smoking in the UK is very popular, but not as popular as it once was.
-                As shown by the graphs below: back in 2011 around 20% of adults smoked, but this has dropped to
-                around 10% since 2024.
-            </p>
-
-            <div>
-                <div class="button-group" id="usage-buttons">
-                    <button type="button" id="ethnicity-button" class="usage-btn">By ethnicity</button>
-                    <button type="button" id="region-button" class="usage-btn">By region</button>
-                    <button type="button" id="sex-button" class="usage-btn">By sex</button>
-                    <button type="button" id="age-button" class="usage-btn">By age</button>
+                <div class="multi-graph">
+                    <div class="button-group" id="usage-buttons">
+                        <button type="button" id="ethnicity-button" class="usage-btn">By ethnicity</button>
+                        <button type="button" id="region-button" class="usage-btn">By region</button>
+                        <button type="button" id="sex-button" class="usage-btn">By sex</button>
+                        <button type="button" id="age-button" class="usage-btn">By age</button>
+                    </div>
+                    <canvas class="chart" id="cigarette-usage-chart"></canvas>
                 </div>
-                <canvas class="chart" id="cigarette-usage-chart"></canvas>
+                <p>
+                    These charts have shown that smoking has gone down dramatically over the last couple of decades: from
+                    30% in 2000 to under 10% since 2024.
+                </p>
+                <p>
+                    An interesting point to note is how the usage by age demographic has changed over the years as well.
+                    For the majority of the last two decades a higher percentage of younger Brits smoked compared to the older
+                    generations, with 25-34 year olds being having the highest percentage, followed by 16-24 year olds - who
+                    managed to overtake the 25-34 year olds a couple oftimes, in 2011 and 2018.
+                </p>
+                <p>
+                    However, starting with 2019, the percentage of people younger than 24 smoking has dropped from being
+                    consistently one of the highest percentage of smokers, to now being one of the lowest. With the
+                    25-34 demographic dropping from being the top smokers to now being the 3rd lowest percentage of smokers.
+                </p>
+                <p>
+                    This change in usage by age makes sense as to why the UK government has decided to lockdown on smoking
+                    and prevent younger people from smoking, as smoking has already started to decrease in popularity amongst
+                    younger people.
+                </p>
+                <p></p>
             </div>
-            <p>
-                These charts have shown that smoking has gone down dramatically over the last couple of decades: from
-                30% in 2000 to under 10% since 2024.
-            </p>
-            <p>
-                An interesting point to note is how the usage b yage demographic has changed over the years as well.
-                For the majority of the last two decades a higher percentage of younger Brits smoked compared to the older
-                generations, with 25-34 year olds being having the highest percentage, followed by 16-24 year olds - who
-                managed to overtake the 25-34 year olds a couple oftimes, in 2011 and 2018.
-            </p>
-            <p>
-                However, starting with 2019, the percentage of people younger than 24 smoking has dropped from being
-                consistently one of the highest percentage of smokers, to now being one of the lowest. With the
-                25-34 demographic dropping from being the top smokers to now being the 3rd lowest percentage of smokers.
-            </p>
-            <p>
-                This change in usage by age makes sense as to why the UK government has decided to lockdown on smoking
-                and prevent younger people from smoking, as smoking has already started to decrease in popularity amongst
-                younger people.
-            </p>
-            <p></p>
-        </div>
+
+            <div id="quitting">
+                <h2>Quitting</h2>
+
+
+            </div>
+
+
+        </section>
 
         <div id="health-risks">
             <h2>The effects of smoking</h2>
@@ -88,6 +97,26 @@
             </p>
             <p>It's not just harmful to your body, bit it also impacts your mind/mental health, appearance, finances and relationships. test</p>
 
+            <div>
+                <div class="pie-chart-group" id="death-charts">
+                    <canvas class="death-pie-chart" id="women-death"></canvas>
+                    <canvas class="death-pie-chart" id="men-death"></canvas>
+                    <canvas class="death-pie-chart" id="total-death"></canvas>
+                </div>
+            </div>
+
+            <div class="smart-graph">
+                <div class="button-group" id="death-buttons">
+                    <button type="button" id="total-death-btn" class="death-btn">Overall</button>
+                    <button type="button" id="men-death-btn" class="death-btn">Men</button>
+                    <button type="button" id="women-death-btn" class="death-btn">Women</button>
+                </div>
+                <canvas class="pie-chart" id="smart-death-chart"></canvas>
+            </div>
+
+            <div>
+                <canvas class="multi-chart" id="multi-chart"></canvas>
+            </div>
             <section>
                 <h3>Physical affects</h3>
                 <p>
@@ -109,9 +138,10 @@
             <section>
                 <h3>Appearance</h3>
             </section>
-            <div>
 
-            </div>
+            <section>
+                <h3>Deaths</h3>
+            </section>
         </div>
     </div>
 </body>

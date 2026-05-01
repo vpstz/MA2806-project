@@ -50,10 +50,29 @@ body {
     border-right: none; /* Prevent double borders */
 }
 
+.pie-chart {
+    /*max-width: 100%*/
+    max-height: 90%;
+    width: 100%;
+}
+
 /* Add a background color on hover */
 .button-group button:hover {
     background-color: #d59034;
     border: 2px outset darkgoldenrod;
+}
+
+.pie-chart-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    flex: 1;
+    width: 30%;
+}
+.death-pie-chart {
+    flex-shrink: 1;
+    width: 50%;
+/*    !*flex: 1;*!*/
+/*    float: left;*/
 }
 
 nav {
