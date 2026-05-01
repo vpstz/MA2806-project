@@ -96,18 +96,6 @@ function load_usage(datasets) {
     ethnicity_btn.click();
 }
 
-function draw_pie(element, dataset, labels) {
-    const data = {
-        labels: labels,
-        datasets: [dataset]
-    }
-    new Chart(element, {
-        type: 'doughnut',
-        data: data,
-    })
-}
-
-
 
 function load_death_chart(datasets) {
     const chart_group = document.getElementById('death-charts');
@@ -160,12 +148,6 @@ function load_death_chart(datasets) {
     // }
     // new Chart(chart_elements.men, config);
 
-}
-
-function load_multi_chart(datasets) {
-    const element = document.getElementById('multi-chart');
-
-    new Chart(element, datasets);
 }
 
 async function main() {
