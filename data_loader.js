@@ -81,18 +81,26 @@ function gen_options(title, subtitle) {
         aspectRatio: 0,
             responsive: true,
         plugins: {
-        legend: {
-            position: 'right',
-            align: 'start'
-        },
-        subtitle: {
-            position: 'bottom',
-            font: {
-                size: 16,
+            legend: {
+                position: 'right',
+                align: 'start'
             },
-            display: true,
-            align: 'start',
-            text: subtitle
+            title: {
+                display: true,
+                text: title,
+                align: 'start',
+                font: {
+                    size: 16,
+                }
+            },
+            subtitle: {
+                position: 'bottom',
+                font: {
+                    size: 16,
+                },
+                display: true,
+                align: 'start',
+                text: subtitle
         }
     }
     }
@@ -129,7 +137,7 @@ function read_death(csv) {
     let format = new Intl.NumberFormat('en-GB')
     for (let item in datasets) {
         configs[item] = gen_config('pie', {labels: labels, datasets:datasets[item]},
-            gen_options(undefined, "Total smoking related deaths: " + format.format(totals[item]))
+            gen_options("Smoking related deaths in 2019", "Total smoking related deaths: " + format.format(totals[item]))
         );
     }
 
