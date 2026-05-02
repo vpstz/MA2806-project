@@ -48,6 +48,7 @@ function smart_update(chart, config) {
 
 function button_action(chart, config, buttons, category) {
     smart_update(chart, config[category]);
+    change_hash('#' + buttons[category].id);
 
     for (const btn in buttons) {
         if (buttons[btn].disabled) {
@@ -77,6 +78,7 @@ function changeUsageGraph(chart, buttons, descriptions, key , data) {
             description.style.display = 'none';
         }
     }
+    change_hash('#' + key+'-button');
 
     updateChart(chart, data[key]);
 
@@ -102,12 +104,15 @@ function load_usage(datasets) {
 
 }
 
+function change_hash(hash) {
+    history.replaceState(null, null, document.location.pathname  +hash);
+}
 
 function load_death_chart(datasets) {
     const death_buttons = {
-        total: document.getElementById('total-death-btn'),
-        women: document.getElementById('women-death-btn'),
-        men: document.getElementById('men-death-btn'),
+        total: document.getElementById('total-death-button'),
+        women: document.getElementById('women-death-button'),
+        men: document.getElementById('men-death-button'),
     }
 
     let chart = new Chart(document.getElementById('smart-death-chart'), {
@@ -149,13 +154,34 @@ function load_death_chart(datasets) {
 
 }
 
+function process_dynamic_hash() {
+    const fragment = location.hash;
+
+    if (fragment.includes('button')) {
+        console.log(fragment)
+        const button = document.getElementById(fragment.slice(1));
+        console.log(button);
+        if (button) {
+            console.log("click")
+            button.click();
+        }
+    }
+}
+
 async function main() {
     // let chart_elements = document.getElementsByClassName('chart');
     const datasets = await load_datasets();
 
+    const old_hash = location.hash;
+
     load_usage(datasets.usage);
     load_death_chart(datasets.deaths);
-
+    change_hash(old_hash);
+    process_dynamic_hash();
+    addEventListener('hashchange', () => {
+        process_dynamic_hash();
+        console.log('changed')
+    });
 }
 
 main();
