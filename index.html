@@ -35,14 +35,14 @@
             <h1>Tobacco use in the UK</h1>
         </header>
         <p>
-            In the UK, smoking is no longer as prevalent as it once was.  It has been banned from taking place in pubs,
-            restaurants, offices, and public buildings, and now the government is banning the sale of cigarettes to
-            anyone born after 2008.  That made me wonder: is smoking already disappearing, or is it simply changing who
-            it affects?
+            In the UK, smoking is no longer as prevalent as it once was.  It has been banned in pubs,
+            restaurants, offices, and public buildings.  In addition to this these restrictions, government is now also
+            banning the sale of cigarettes to anyone born after 2008.  That made me wonder: is smoking already
+            disappearing, or is it simply changing who it affects?
         </p>
         <p>
             To explore this, I used UK smoking prevalence data by demographic groups, alongside health and mortality
-            data linked to smoking.  Together, these datasets will show a story of decline
+            data linked to smoking.  Together, these datasets show a story of the decline, and harm
         </p>
         <section>
             <div id="cigarette-use">
@@ -58,6 +58,7 @@
                         <button type="button" id="sex-button" class="usage-btn sex" >By sex</button>
                         <button type="button" id="age-button" class="usage-btn age">By age</button>
                         <button type="button" id="ethnicity-button" class="usage-btn ethnicity">By ethnicity</button>
+                        <button type="button" id="country-button" class="usage-btn country">By country</button>
                         <button type="button" id="region-button" class="usage-btn region">By region</button>
                     </div>
                     <canvas class="chart" id="cigarette-usage-chart"></canvas>
@@ -98,6 +99,10 @@
                                 groups like Asian, Chinese and black are consistently at the bottom.  This suggests that
                                 smoking is shaped by social and cultural factors, not just individual choice.
                             </p>
+                        </div>
+
+                        <div class="dynamic-description country">
+                            <p>placeholder</p>
                         </div>
 
                         <div class="dynamic-description region" id="region-description" >

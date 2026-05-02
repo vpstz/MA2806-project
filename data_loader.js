@@ -162,6 +162,7 @@ async function load_datasets() {
     const datasets = {
         usage: {
             ethnicity: await readData("datasets/ethnicity-usage.csv"),
+            country: await readData("datasets/usage-by-country.csv"),
             region: await readData("datasets/regional-usage.csv"),
             sex: await readData("datasets/usage-by-sex.csv"),
             age: await readData("datasets/by-age.csv"),
