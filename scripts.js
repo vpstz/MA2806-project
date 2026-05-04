@@ -79,31 +79,6 @@ function change_hash(hash) {
     history.replaceState(null, null, document.location.pathname  +hash);
 }
 
-function load_death_chart(datasets) {
-    const death_buttons = {
-        total: document.getElementById('total-death-button'),
-        women: document.getElementById('women-death-button'),
-        men: document.getElementById('men-death-button'),
-    }
-
-    let chart = new Chart(document.getElementById('smart-death-chart'), {
-        type: 'doughnut',
-        data: {},
-        options: {
-            aspectRatio: 1,
-            legend: {
-                position: 'right',
-                alight: 'middle'
-            }
-        }
-    });
-
-    for (let i in death_buttons) {
-        death_buttons[i].onclick = () => {button_action(chart, datasets, death_buttons, i)};
-    }
-    Object.values(death_buttons)[0].click();
-}
-
 function process_dynamic_hash() {
     const fragment = location.hash;
 
