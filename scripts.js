@@ -46,10 +46,11 @@ function changeUsageGraph(chart, buttons, key , data, descriptions) {
 }
 
 function load_usage(datasets, has_description = true, category, type) {
+    // Generates the chart which will allow it to be updated later on by the buttons
     const chart = new Chart(document.getElementById(category + '-chart'), {
-        type: type,
+        type: type, // Has to be set to the type of graph it's going to be later on otherwise chart.js gets confused
         data: {},
-        options: {
+        options: { // Has an empty options area otherwise chart.js doesn't like how my update function works.
             aspectRatio: 1,
             legend: {
                 position: 'right',
@@ -57,24 +58,23 @@ function load_usage(datasets, has_description = true, category, type) {
             }
         }
     });
-    // console.log(data)
-    // drawChart(chart_elements[0], data);
+
+    // This is for if it's the usage chart where it has dynamic descriptions.
     let descriptions;
     if (has_description)  descriptions = document.getElementById(category + '-descriptions');// get_elements_of(keys, '-description');
-    const buttons = document.getElementById(category + '-buttons');// get_elements_of(keys, '-button');
-    // for (const key of keys) {
-    //     buttons[key].onclick = () => {changeUsageGraph(usage_chart, buttons, descriptions, key, datasets)}
-    // }
+    const buttons = document.getElementById(category + '-buttons');
+
+    // Loops through the buttons in the button group
     for (const button of buttons.children) {
-        const key = button.classList[1];
+        const key = button.classList[1];  // uses classList[1] as it has two classes.
         button.onclick = () => {changeUsageGraph(chart, buttons, key, datasets, descriptions);};
     }
-    buttons.children[0].click();
+    buttons.children[0].click(); // By default, clicks the button which is first in the button group.
 
-    // console.log(datasets.sex);
 
 }
 
+// Used to change the hash part of the url without calling the event listener.
 function change_hash(hash) {
     history.replaceState(null, null, document.location.pathname  +hash);
 }
