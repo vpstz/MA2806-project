@@ -104,7 +104,6 @@ async function main() {
     process_dynamic_hash();
     addEventListener('hashchange', () => {
         process_dynamic_hash();
-        console.log('changed')
     });
 }
 

@@ -92,7 +92,6 @@ function parse_data(csv, type,
     let datasets = {};
     let min_x = new Date("2090");
     let max_x = new Date("1989");
-    // console.log(csv.meta.fields);
 
     for (const key of csv.meta.fields.splice(1)) {
         totals[key] = 0;
@@ -103,7 +102,6 @@ function parse_data(csv, type,
     let column_key = csv.meta.fields[0];
 
     for (let item of result) {
-        // console.log(item);
         if (!by_date) labels.push(item[column_key]);
         // deaths.labels.push(item['cause']);
         for (let i in datasets) {
