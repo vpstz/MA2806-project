@@ -29,8 +29,8 @@ function parse_csv(csv) {
     const columns = Object.keys(data[0]);
     const dateKey = columns[0]; // assume first column is date
     const seriesKeys = columns.slice(1);
-    let min = new Date("2030");
-    let max = new Date("2000");
+    let min = new Date("2060");
+    let max = new Date("1990");
 
     // Build datasets for Chart.js
     const datasets = seriesKeys.map(key => {
@@ -77,6 +77,10 @@ function gen_dataset(label) {
 }
 
 function gen_options(title, subtitle) {
+    let display_title, display_subtitle;
+    display_subtitle = display_title = true;
+    if (title === undefined) display_title = false;
+    if (subtitle === undefined) subtitle = false;
     return {
         aspectRatio: 0,
             responsive: true,
@@ -86,7 +90,7 @@ function gen_options(title, subtitle) {
                 align: 'start'
             },
             title: {
-                display: true,
+                display: display_title,
                 text: title,
                 align: 'start',
                 font: {
@@ -98,7 +102,7 @@ function gen_options(title, subtitle) {
                 font: {
                     size: 16,
                 },
-                display: true,
+                display: display_subtitle,
                 align: 'start',
                 text: subtitle
         }
@@ -106,42 +110,108 @@ function gen_options(title, subtitle) {
     }
 }
 
-function read_death(csv) {
+function gen_usage_options(min, max, max_y) {
+    return {
+        parsing: false,
+
+        scales: {
+            x: {
+                type: "time",
+                time: {
+                    unit: "year"
+                },
+                min: min,
+                max: max,
+                title: {
+                    display: true,
+                    text: "Year"
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: "Percentage"
+                }
+            }
+        }
+    }
+}
+
+function parse_data(csv, type,
+                    by_date=false,
+                    calc_totals=true,
+                    combine_sets=false,
+) {
     const result = csv.data;
+    let totals = {}
+    let datasets = {};
+    let min_x = new Date("2090");
+    let max_x = new Date("1989");
+    // console.log(csv.meta.fields);
 
-
-    let totals = {
-        men: 0,
-        women: 0,
-        total: 0,
+    for (const key of csv.meta.fields.splice(1)) {
+        totals[key] = 0;
+        datasets[key] = [gen_dataset(key.charAt(0).toUpperCase() + key.slice(1))]
     }
 
-    let datasets = {
-        total: [gen_dataset('Total')],
-        men: [gen_dataset('Men')],
-        women: [gen_dataset('Women')],
 
-    }
+    // let totals = {
+    //     men: 0,
+    //     women: 0,
+    //     total: 0,
+    // }
+    //
+    // let datasets = {
+    //     total: [gen_dataset('Total')],
+    //     men: [gen_dataset('Men')],
+    //     women: [gen_dataset('Women')],
+    //
+    // }
     let labels = [];
+    let column_key = csv.meta.fields[0];
 
     for (let item of result) {
-        console.log(item);
-        labels.push(item['cause']);
+        // console.log(item);
+        if (!by_date) labels.push(item[column_key]);
         // deaths.labels.push(item['cause']);
         for (let i in datasets) {
-            datasets[i][0].data.push(item[i]);
-            totals[i] += Number(item[i]);
+            const date = new Date(item[column_key]);
+            const y_val = Number(item[i]);
+            if (date > max_x) {max_x = date;}
+            if (date < min_x) {min_x = date;}
+            if (by_date) {
+                datasets[i][0].data.push({
+                    x: date,
+                    y: y_val
+                })
+            } else {
+                datasets[i][0].data.push(item[i]);
+            }
+            if (calc_totals) totals[i] += Number(item[i]);
         }
     }
     let configs = {};
     let format = new Intl.NumberFormat('en-GB')
-    for (let item in datasets) {
-        configs[item] = gen_config('pie', {labels: labels, datasets:datasets[item]},
-            gen_options("Smoking related deaths in 2019", "Total smoking related deaths: " + format.format(totals[item]))
-        );
+    if (combine_sets) {
+        let output = [];
+        for (let i in datasets) {
+            output.push(datasets[i][0])
+        }
+        datasets = output;
+        configs = gen_config(type, {labels: labels, datasets: datasets},
+            gen_usage_options(min_x, max_x)
+            );
+    } else {
+        for (let item in datasets) {
+            configs[item] = gen_config(type, {labels: labels, datasets: datasets[item]},
+                gen_options("Smoking related deaths in 2019", "Total smoking related deaths: " + format.format(totals[item]))
+            );
+        }
     }
 
     // deaths.datasets = Object.values(datasets);
+
+
 
     return configs;
 }
@@ -152,24 +222,29 @@ async function readData(uri, data_type) {
         header: true,
     })
     if (data_type === null || data_type === undefined|| data_type === 'usage') {
-        return parse_csv(result);
+        const out = parse_data(result, "line", true, false, true);
+        return out;
     } else if (data_type === 'deaths') {
-        return read_death(result);
+        const out =  parse_data(result, "doughnut");
+        console.log("deaths");
+        console.log(out);
+        console.log('bottom');
+        return out;
     }
 }
 
 async function load_datasets() {
     const datasets = {
         usage: {
-            ethnicity: await readData("datasets/ethnicity-usage.csv"),
-            country: await readData("datasets/usage-by-country.csv"),
-            region: await readData("datasets/regional-usage.csv"),
-            sex: await readData("datasets/usage-by-sex.csv"),
-            age: await readData("datasets/by-age.csv"),
+            ethnicity: await readData("datasets/ethnicity-usage.csv", 'usage'),
+            country: await readData("datasets/usage-by-country.csv", 'usage'),
+            region: await readData("datasets/regional-usage.csv", 'usage'),
+            sex: await readData("datasets/usage-by-sex.csv", 'usage'),
+            age: await readData("datasets/by-age.csv", 'usage'),
         },
         deaths: await readData("datasets/death-rate.csv", "deaths"),
     };
-    console.log(datasets.usage.age);
+    // console.log(datasets.usage.age);
     return datasets;
     // regional dataset
 

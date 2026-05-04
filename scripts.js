@@ -1,6 +1,6 @@
 
 
-function drawChart(element, data) {
+function gen_usage_chart(element, data) {
     // TODO: finish draw chart function
     return new Chart(element, {
         type: 'line',
@@ -32,10 +32,15 @@ function drawChart(element, data) {
         });
 }
 
+function gen_death_chart(element) {
+
+}
+
 function smart_update(chart, config) {
+    // console.log(config);
     const keys = Object.keys(config);
     if (keys.includes('options')) {
-        chart.options = config.options;
+        Object.assign(chart.options, config.options);
     }
     if (keys.includes('data')) {
         chart.data = config.data;
@@ -66,41 +71,52 @@ function updateChart(chart, data) {
     chart.update();
 }
 
-function changeUsageGraph(chart, buttons, descriptions, key , data) {
+function changeUsageGraph(chart, buttons, key , data, descriptions) {
     for (const button of buttons.children) {
         const i = button.classList[1];
-        const description =  descriptions.getElementsByClassName(i)[0];
+        let description;
+        if (descriptions !== undefined) description =  descriptions.getElementsByClassName(i)[0];
         if (i === key) {
             button.disabled = true;
-            description.style.display = 'block';
+            if (descriptions !== undefined) description.style.display = 'block';
         } else {
             button.disabled = false;
-            description.style.display = 'none';
+            if (descriptions !== undefined) description.style.display = 'none';
         }
     }
     change_hash('#' + key+'-button');
 
-    updateChart(chart, data[key]);
+    smart_update(chart, data[key]);
 
 }
 
-function load_usage(datasets) {
-    const usage_chart = drawChart(document.getElementById("cigarette-usage-chart"), {})
+function load_usage(datasets, has_description = true, category, type) {
+    const chart = new Chart(document.getElementById(category + '-chart'), {
+        type: type,
+        data: {},
+        options: {
+            aspectRatio: 1,
+            legend: {
+                position: 'right',
+                alight: 'middle'
+            }
+        }
+    });
     // console.log(data)
     // drawChart(chart_elements[0], data);
-
-    const descriptions = document.getElementById('usage-descriptions');// get_elements_of(keys, '-description');
-    const buttons = document.getElementById('usage-buttons');// get_elements_of(keys, '-button');
+    let descriptions;
+    if (has_description)  descriptions = document.getElementById(category + '-descriptions');// get_elements_of(keys, '-description');
+    const buttons = document.getElementById(category + '-buttons');// get_elements_of(keys, '-button');
     // for (const key of keys) {
     //     buttons[key].onclick = () => {changeUsageGraph(usage_chart, buttons, descriptions, key, datasets)}
     // }
     for (const button of buttons.children) {
         const key = button.classList[1];
-        button.onclick = () => {changeUsageGraph(usage_chart, buttons, descriptions, key, datasets);};
+        button.onclick = () => {changeUsageGraph(chart, buttons, key, datasets, descriptions);};
     }
     buttons.children[0].click();
 
-    console.log(datasets.sex);
+    // console.log(datasets.sex);
 
 }
 
@@ -158,9 +174,9 @@ function process_dynamic_hash() {
     const fragment = location.hash;
 
     if (fragment.includes('button')) {
-        console.log(fragment)
+        // console.log(fragment)
         const button = document.getElementById(fragment.slice(1));
-        console.log(button);
+        // console.log(button);
         if (button) {
             console.log("click")
             button.click();
@@ -174,8 +190,8 @@ async function main() {
 
     const old_hash = location.hash;
 
-    load_usage(datasets.usage);
-    load_death_chart(datasets.deaths);
+    load_usage(datasets.usage, true, "usage", "line");
+    load_usage(datasets.deaths, false, "death", "doughnut");
     change_hash(old_hash);
     process_dynamic_hash();
     addEventListener('hashchange', () => {
