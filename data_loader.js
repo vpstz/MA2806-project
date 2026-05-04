@@ -103,7 +103,6 @@ function parse_data(csv, type,
 
     for (let item of result) {
         if (!by_date) labels.push(item[column_key]);
-        // deaths.labels.push(item['cause']);
         for (let i in datasets) {
             const date = new Date(item[column_key]);
             const y_val = Number(item[i]);
