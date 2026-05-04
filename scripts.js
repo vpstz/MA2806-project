@@ -26,14 +26,6 @@ function button_action(chart, config, buttons, category) {
     buttons[category].disabled = true;
 }
 
-
-function updateChart(chart, data) {
-    chart.data = {datasets: data.dataset};
-    chart.options.scales.x.min = data.min
-    chart.options.scales.x.max = data.max
-    chart.update();
-}
-
 function changeUsageGraph(chart, buttons, key , data, descriptions) {
     for (const button of buttons.children) {
         const i = button.classList[1];
@@ -110,27 +102,6 @@ function load_death_chart(datasets) {
         death_buttons[i].onclick = () => {button_action(chart, datasets, death_buttons, i)};
     }
     Object.values(death_buttons)[0].click();
-    // for (let data in datasets.datasets) {
-    //     // draw_pie(Object.values(chart_elements)[data], datasets.datasets[data], datasets.labels);
-    //
-    // }
-    // Multi layer
-    // let config = {
-    //     type: 'pie',
-    //     data: datasets,
-    //     options: {
-    //         responsive: true,
-    //         // plugins: {
-    //         //     legend: {
-    //         //         labels: {
-    //         //
-    //         //         }
-    //         //     }
-    //         // }
-    //     }
-    // }
-    // new Chart(chart_elements.men, config);
-
 }
 
 function process_dynamic_hash() {
@@ -148,7 +119,6 @@ function process_dynamic_hash() {
 }
 
 async function main() {
-    // let chart_elements = document.getElementsByClassName('chart');
     const datasets = await load_datasets();
 
     const old_hash = location.hash;
