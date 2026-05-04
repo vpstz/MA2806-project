@@ -109,7 +109,7 @@ img {
 }
 
 .chart {
-    max-height: 90%;
+    max-height: 500px;
 }
 
 .dynamic-descriptions-container {
