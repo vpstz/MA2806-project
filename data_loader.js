@@ -1,3 +1,4 @@
+// Template for the config to pass into chart.js
 function gen_config(type, data, options) {
     return {
         type: type,
@@ -6,6 +7,7 @@ function gen_config(type, data, options) {
     }
 }
 
+// Template for the datasets
 function gen_dataset(label) {
     return {
         label: label,
@@ -13,6 +15,7 @@ function gen_dataset(label) {
     }
 }
 
+// Return template for the options
 function gen_options(title, subtitle) {
     let display_title, display_subtitle;
     display_subtitle = display_title = true;
@@ -47,7 +50,8 @@ function gen_options(title, subtitle) {
     }
 }
 
-function gen_usage_options(min, max, max_y) {
+// Generates options for the by usage graph
+function gen_usage_options(min, max) {
     return {
         parsing: false,
 
@@ -74,6 +78,7 @@ function gen_usage_options(min, max, max_y) {
     }
 }
 
+// Processes the data from the csv into a form that can be used by chart.js
 function parse_data(csv, type,
                     by_date=false,
                     calc_totals=true,
@@ -140,23 +145,20 @@ function parse_data(csv, type,
     return configs;
 }
 
+// Configures how to call the parse_data function based on what type of graph it's for.
 async function readData(uri, data_type) {
     let result = await fetch(uri);
     result = Papa.parse(await result.text(), {
         header: true,
     })
     if (data_type === null || data_type === undefined|| data_type === 'usage') {
-        const out = parse_data(result, "line", true, false, true);
-        return out;
+        return parse_data(result, "line", true, false, true);
     } else if (data_type === 'deaths') {
-        const out =  parse_data(result, "doughnut");
-        console.log("deaths");
-        console.log(out);
-        console.log('bottom');
-        return out;
+        return parse_data(result, "doughnut");
     }
 }
 
+// Loads all the datasets
 async function load_datasets() {
     return {
         usage: {
