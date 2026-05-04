@@ -79,6 +79,9 @@ function gen_usage_options(min, max) {
 }
 
 // Processes the data from the csv into a form that can be used by chart.js
+// Originally had two methods for each graph type, but then managed to optimise it into one function
+// As this allowed me to easily process datasets/configs in a standard format that would allow me to use
+// the same functions to draw both charts.
 function parse_data(csv, type,
                     by_date=false,
                     calc_totals=true,
