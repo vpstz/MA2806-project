@@ -13,18 +13,6 @@ function smart_update(chart, config) {
     chart.update();
 }
 
-function button_action(chart, config, buttons, category) {
-    smart_update(chart, config[category]);
-    change_hash('#' + buttons[category].id);
-
-    for (const btn in buttons) {
-        if (buttons[btn].disabled) {
-            buttons[btn].disabled = false;
-        }
-    }
-    buttons[category].disabled = true;
-}
-
 function changeUsageGraph(chart, buttons, key , data, descriptions) {
     for (const button of buttons.children) {
         const i = button.classList[1];
