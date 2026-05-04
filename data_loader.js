@@ -91,19 +91,6 @@ function parse_data(csv, type,
         datasets[key] = [gen_dataset(key.charAt(0).toUpperCase() + key.slice(1))]
     }
 
-
-    // let totals = {
-    //     men: 0,
-    //     women: 0,
-    //     total: 0,
-    // }
-    //
-    // let datasets = {
-    //     total: [gen_dataset('Total')],
-    //     men: [gen_dataset('Men')],
-    //     women: [gen_dataset('Women')],
-    //
-    // }
     let labels = [];
     let column_key = csv.meta.fields[0];
 
@@ -171,7 +158,7 @@ async function readData(uri, data_type) {
 }
 
 async function load_datasets() {
-    const datasets = {
+    return {
         usage: {
             ethnicity: await readData("datasets/ethnicity-usage.csv", 'usage'),
             country: await readData("datasets/usage-by-country.csv", 'usage'),
@@ -181,8 +168,4 @@ async function load_datasets() {
         },
         deaths: await readData("datasets/death-rate.csv", "deaths"),
     };
-    // console.log(datasets.usage.age);
-    return datasets;
-    // regional dataset
-
 }
