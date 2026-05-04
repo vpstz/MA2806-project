@@ -1,41 +1,4 @@
 
-
-function gen_usage_chart(element, data) {
-    // TODO: finish draw chart function
-    return new Chart(element, {
-        type: 'line',
-        data: data,
-        options: {
-            parsing: false,
-
-            scales: {
-                x: {
-                    type: "time",
-                    time: {
-                        unit: "year"
-                    },
-                    min: new Date('2007-01-01'),
-                    max: new Date('2024-12-31'),
-                    title: {
-                        display: true,
-                        text: "Year"
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: "Percentage"
-                    }
-                }
-            }
-        }
-        });
-}
-
-function gen_death_chart(element) {
-
-}
-
 function smart_update(chart, config) {
     // console.log(config);
     const keys = Object.keys(config);
