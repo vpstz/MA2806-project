@@ -1,6 +1,5 @@
-
+// Updates the chart using the config loaded by data_loader to a new dataset
 function smart_update(chart, config) {
-    // console.log(config);
     const keys = Object.keys(config);
     if (keys.includes('options')) {
         Object.assign(chart.options, config.options);
@@ -79,15 +78,14 @@ function change_hash(hash) {
     history.replaceState(null, null, document.location.pathname  +hash);
 }
 
+
+// This is used for when a link to a specific graph which is behind a button is used, so a link can open up specific graphs.
 function process_dynamic_hash() {
     const fragment = location.hash;
 
     if (fragment.includes('button')) {
-        // console.log(fragment)
         const button = document.getElementById(fragment.slice(1));
-        // console.log(button);
         if (button) {
-            console.log("click")
             button.click();
         }
     }
@@ -100,6 +98,8 @@ async function main() {
 
     load_usage(datasets.usage, true, "usage", "line");
     load_usage(datasets.deaths, false, "death", "doughnut");
+
+
     change_hash(old_hash);
     process_dynamic_hash();
     addEventListener('hashchange', () => {
